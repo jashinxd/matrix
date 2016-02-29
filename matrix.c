@@ -21,7 +21,7 @@ struct matrix *new_matrix(int rows, int cols) {
   tmp = (double **)malloc(rows * sizeof(double *));
   for (i=0;i<rows;i++) {
       tmp[i]=(double *)malloc(cols * sizeof(double));
-    }
+  }
 
   m=(struct matrix *)malloc(sizeof(struct matrix));
   m->m=tmp;
