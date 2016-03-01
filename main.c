@@ -6,18 +6,20 @@
 #include "display.h"
 #include "draw.h"
 #include "matrix.h"
-#include "parser.h"
 
 int main() {
 
   screen s;
+  struct matrix *test;
   struct matrix *edges;
   struct matrix *transform;
 
-  edges = new_matrix(4, 4);
-  transform = new_matrix(4, 4);
+  test = new_matrix(4,4);
+  
+  //edges = new_matrix(4, 4);
+  //transform = new_matrix(4, 4);
 
   
-  free_matrix( transform );
-  free_matrix( edges );
+  //free_matrix( transform );
+  //free_matrix( edges );
 }  

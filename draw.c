@@ -6,6 +6,15 @@
 #include "draw.h"
 #include "matrix.h"
 
+/*======== int test_empty() ==========
+Inputs:   double * point
+         
+Returns: 
+if points is empty, returns 1, else returns 0
+====================*/
+int test_empty( double * point) {
+}
+
 /*======== void add_point() ==========
 Inputs:   struct matrix * points
          int x
@@ -16,14 +25,16 @@ adds point (x, y, z) to points and increment points.lastcol
 if points is full, should call grow on points
 ====================*/
 void add_point( struct matrix * points, int x, int y, int z) {
-  if(points[points.lastcol]) {
+  if(points[points->lastcol]) {
     points = grow_matrix(points, lastcol + 2);
     cols++;
   }
-  double * new_point;
-  new_point[0] = x; new_point[1] = y; new_point[2] = z; new_point[3] = 1;
-  points[lastcol + 1] = new_point;
-  points.lastcol++;
+  int nc = points->lastcol++;
+  points[0][nc] = x;
+  new_point[1][nc] = y;
+  new_point[2][nc] = z;
+  new_point[3][nc] = 1;
+  points->lastcol++;
 }
 
 /*======== void add_edge() ==========
@@ -50,7 +61,9 @@ to the screen
 ====================*/
 void draw_lines( struct matrix * points, screen s, color c) {
   int i;
-  for (i = 0; i < points.col
+  for (i = 0; i < points->cols, i+=2) {
+    draw_line(points[0][i], points[1][i], points[0][i+1], points[1][i+1], s, c);
+  }
 }
 
 
