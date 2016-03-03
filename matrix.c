@@ -79,13 +79,14 @@ print the matrix
 void print_matrix(struct matrix *m) {
   int row = 0;
   int col = 0;
-  for (row = 0; row < m.rows; row++) {
+  for (row = 0; row < m->rows; row++) {
     printf("[");
-    for (col = 0; col < m.cols; cols++) {
-      printf("%d", m[row][col]);
-      if (col < m.col - 1) {
-	printf(", "); else printf("]");
+    for (col = 0; col < m->cols; col++) {
+      printf("%f", m->m[row][col]);
+      if (col < m->cols - 1) {
+	printf(", ");
       }
+      else printf("]\n");
     }
   }
 }
@@ -102,11 +103,11 @@ void ident(struct matrix *m) {
   int row;
   int col;
   int curr = 0;
-  for (row = 0; row < m.rows; row++) {
-    for (col = 0; col < m.cols; col++) {
-      m[row][col] = 0;
+  for (row = 0; row < m->rows; row++) {
+    for (col = 0; col < m->cols; col++) {
+      m->m[row][col] = 0;
     }
-    m[row][curr] = 1;
+    m->m[row][curr] = 1;
     curr++;
   }
 }

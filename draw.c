@@ -6,13 +6,21 @@
 #include "draw.h"
 #include "matrix.h"
 
-/*======== int test_empty() ==========
+/*======== int test_full() ==========
 Inputs:   double * point
          
 Returns: 
-if points is empty, returns 1, else returns 0
+if point is full, returns 1, else returns 0
 ====================*/
-int test_empty( double * point) {
+int test_full( struct matrix * points ) {
+  int i = 0;
+  for (i = 0; i < 4; i++) {
+    printf("num: %f, %d\n",points->m[i][points->lastcol], points->m[i][points->lastcol] != (double)0);
+    if (points->m[points->cols - 1][i] != (double)0) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 /*======== void add_point() ==========
@@ -25,16 +33,17 @@ adds point (x, y, z) to points and increment points.lastcol
 if points is full, should call grow on points
 ====================*/
 void add_point( struct matrix * points, int x, int y, int z) {
-  if(points[points->lastcol]) {
-    points = grow_matrix(points, lastcol + 2);
-    cols++;
+  printf("test_full: %d\n", test_full(points));
+  if(test_full(points)) {
+    grow_matrix(points, points->cols);
+    (points->cols)++;
   }
-  int nc = points->lastcol++;
-  points[0][nc] = x;
-  new_point[1][nc] = y;
-  new_point[2][nc] = z;
-  new_point[3][nc] = 1;
-  points->lastcol++;
+  int nc = points->lastcol;
+  points->m[0][nc] = x;
+  points->m[1][nc] = y;
+  points->m[2][nc] = z;
+  points->m[3][nc] = 1;
+  (points->lastcol)++;
 }
 
 /*======== void add_edge() ==========
@@ -47,8 +56,8 @@ should use add_point
 void add_edge( struct matrix * points, 
 	       int x0, int y0, int z0, 
 	       int x1, int y1, int z1) {
-  add_point(x0, y0, z0);
-  add_point(x1, y1, z1);
+  add_point(points, x0, y0, z0);
+  add_point(points, x1, y1, z1);
 }
 
 /*======== void draw_lines() ==========
@@ -61,8 +70,8 @@ to the screen
 ====================*/
 void draw_lines( struct matrix * points, screen s, color c) {
   int i;
-  for (i = 0; i < points->cols, i+=2) {
-    draw_line(points[0][i], points[1][i], points[0][i+1], points[1][i+1], s, c);
+  for (i = 0; i < points->cols; i+=2) {
+    draw_line(points->m[0][i], points->m[1][i], points->m[0][i+1], points->m[1][i+1], s, c);
   }
 }
 
