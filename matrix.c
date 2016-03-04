@@ -120,8 +120,15 @@ Returns:
 
 multiply each element of m by x
 */
-//void scalar_mult(double x, struct matrix *m) {
-//}
+void scalar_mult(double x, struct matrix *m) {
+  int row;
+  int col;
+  for (row = 0; row < m->rows; row++) {
+    for (col = 0; col < m->cols; col++) {
+      m->m[row][col] *= x;
+    }
+  }
+}
 
 
 /*-------------- void matrix_mult() --------------
@@ -131,8 +138,17 @@ Returns:
 
 a*b -> b
 */
-//void matrix_mult(struct matrix *a, struct matrix *b) {
-//}
+void matrix_mult(struct matrix *a, struct matrix *b) {
+  int aRow;
+  int bCol;
+  int resCol;
+  int tmpM = new_matrix(a->rows, b->cols);
+  for (aRow = 0; aRow < a->rows; aRow++) {
+    for (bCol = 0; bCol < b->cols; bCol++) {
+      tmpM->m[numMult][i] += a->m[numMult][i] * b->m[i][numMult];
+    }
+  }
+}
 
 
 
