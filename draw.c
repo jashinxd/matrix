@@ -14,7 +14,7 @@ if point is full, returns 1, else returns 0
 ====================*/
 int test_full( struct matrix * points ) {
   int i = 0;
-  for (i = 0; i < 4; i++) {
+  for (i = 0; i < points->rows; i++) {
     //printf("num: %f, %d\n",points->m[i][points->lastcol], points->m[i][points->lastcol] != (double)0);
     if (points->m[i][points->cols - 1] != (double)0) {
       return 1;
@@ -33,7 +33,7 @@ adds point (x, y, z) to points and increment points.lastcol
 if points is full, should call grow on points
 ====================*/
 void add_point( struct matrix * points, int x, int y, int z) {
-  //printf("test_full: %d\n", test_full(points));
+  printf("test_full: %d\n", test_full(points));
   if(test_full(points)) {
     grow_matrix(points, points->cols);
     (points->cols)++;
@@ -71,7 +71,7 @@ to the screen
 void draw_lines( struct matrix * points, screen s, color c) {
   int i;
   for (i = 0; i < points->cols; i+=2) {
-    draw_line(points->m[0][i], points->m[1][i], points->m[0][i+1], points->m[1][i+1], s, c);
+    draw_line((int)points->m[0][i], (int)points->m[1][i], (int)points->m[0][i+1], (int)points->m[1][i+1], s, c);
   }
 }
 
