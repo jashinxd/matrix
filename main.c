@@ -102,6 +102,6 @@ int main() {
   display(s);
   save_extension(s, "lines.png");
   
-  //free_matrix( transform );
-  //free_matrix( edges );
+  free_matrix( transform );
+  free_matrix( edges );
 }  
