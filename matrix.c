@@ -93,6 +93,15 @@ void print_matrix(struct matrix *m) {
 }
 
 
+void clear_matrix(struct matrix *m) {
+  int row;
+  int col;
+  for (row = 0; row < m->rows; row++) {
+    for (col = 0; col < m->cols; col++) {
+      m->m[row][col] = 0;
+    }
+  }
+}
 
 /*-------------- void ident() --------------
 Inputs:  struct matrix *m <-- assumes m is a square matrix
@@ -152,6 +161,7 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
     }
   }
   copy_matrix(tmpM, b);
+  clear_matrix(tmpM);
   free_matrix(tmpM);
 }
 

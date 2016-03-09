@@ -80,27 +80,60 @@ int main() {
   add_edge(edges, 100, -1 * 100, 0, -1 * 100, -1 * 100, 0);
   print_matrix(edges);
   */
-  add_edge(edges,200,200,0,400,200,0);
+
+  add_edge(edges,0,0,0,0,30,0);
   print_matrix(edges);
   printf("cols = %d\n", edges->cols);
   printf("lastcol = %d\n", edges->lastcol);
-  add_edge(edges,400,200,0,400,400,0);
+  add_edge(edges,0,30,0,30,30,0);
   print_matrix(edges);
   printf("cols = %d\n", edges->cols);
   printf("lastcol = %d\n", edges->lastcol);
-  add_edge(edges,400,400,0,200,400,0);
+  add_edge(edges,30,30,0,30,0,0);
   print_matrix(edges);
   printf("cols = %d\n", edges->cols);
   printf("lastcol = %d\n", edges->lastcol);
-  
-  add_edge(edges,200,400,0,200,200,0);
+  add_edge(edges,30,0,0,0,0,0);
   print_matrix(edges);
   printf("cols = %d\n", edges->cols);
   printf("lastcol = %d\n", edges->lastcol);
-  
   draw_lines(edges, s, c);
+
+  int i;
+  for (i = 0; i < 20; i++) {                                            
+    transform = make_translate(2, 2, 0);
+    matrix_mult( transform, edges );
+    print_matrix(edges);
+    draw_lines(edges, s, c);
+    //printf("trans");
+    transform = make_rotX(10);
+    matrix_mult( transform, edges );
+    draw_lines(edges, s, c);
+    printf("rotX");
+    transform = make_rotY(10);                                          
+    matrix_mult( transform, edges );                                    
+    draw_lines(edges, s, c);                                            
+    printf("rotY");                                                     
+    transform = make_rotZ(10);                                          
+    matrix_mult( transform, edges );                                    
+    draw_lines(edges, s, c);                                            
+    printf("rotZz");                                                    
+    transform = make_scale(1.1, 1.1, 1.1);                              
+    matrix_mult( transform, edges );                                    
+    draw_lines(edges, s, c);                                            
+    printf("scale");                                                    
+    transform = make_translate(10, 10, 0);                              
+    matrix_mult( transform, edges );                                    
+    draw_lines(edges, s, c);                                            
+    printf("trans");
+    c.red=(c.red + 21) % 256;
+    c.green=(c.red + 12) % 256;
+    c.blue=(c.red + 16) % 256;
+    
+  }           
+  
   display(s);
-  save_extension(s, "lines.png");
+  save_extension(s, "matrix.png");
   
   free_matrix( transform );
   free_matrix( edges );
